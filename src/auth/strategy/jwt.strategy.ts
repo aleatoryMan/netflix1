@@ -3,8 +3,6 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { PrismaService } from "src/prisma/prisma.service";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { parseUnits } from "alchemy-sdk/dist/src/api/utils";
 import { UnauthorizedException } from '@nestjs/common';
 
 @Injectable()

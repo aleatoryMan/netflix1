@@ -12,6 +12,8 @@ import { Controller,
 import { CursoService } from './curso.service';
 import { Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 @Controller('curso')
 export class CursoController {
@@ -20,7 +22,7 @@ export class CursoController {
 
     }
 
-    @Get()
+    /* @Get()
     getTodosCursos() {
         return this.cursos.getTodosCursos();
     }
@@ -48,6 +50,13 @@ export class CursoController {
     updateCurso(@Req() req: Request) {
 
         return this.cursos.updateCurso(req.user, req.body);
+    } */
+
+    @Get('/home')
+    getHome() {
+        const path = join(__dirname, '..', '..', 'public', 'index.html');
+        const pagina = readFileSync(path, 'utf-8');
+        return pagina;
     }
 
 }

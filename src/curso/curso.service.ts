@@ -10,21 +10,11 @@ export class CursoService {
         
     }
 
-    async getCurso(id: number) {
-        const curso = await this.prisma.curso.findUnique({
-            where: {
-                id: id
-            }
-        });
-        
+    
 
-        if (!curso) {            
-            throw new ForbiddenException(
-                'Curso Não Cadastrado'
-            );
-        }
 
-        return curso;
+    async getCurso() {
+        return __dirname;
 
     }
 
