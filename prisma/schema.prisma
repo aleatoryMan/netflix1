@@ -12,55 +12,7 @@ datasource db {
 }
 
 
-model Student {
-  matricula String @id
-  cpf String @unique
-  nome String
-  dataNascimento DateTime
-  endereco_eth String @unique
-
-  email String @unique
-  hashSenha String
-
-  certificados Certificado[]
-  turmas Turma[]
-}
-
-model Curso {
-  id Int @id @default(autoincrement())
-  nome String
-  cargaHoraria Float
-  descricao String
-  certificados Certificado[]
-  turmas Turma[]
-}
-
-
-model Certificado {
-
-  id Int @id @default(autoincrement())
-  endereco_eth String
-  dados String
-  createdAt DateTime @default(now())
-  
-  student Student @relation(fields: [studentMatricula], references: [matricula])
-  studentMatricula String
-
-  curso Curso @relation(fields: [idCurso], references: [id])
-  idCurso Int
-}
-
-model Turma {
-  id Int @id @default(autoincrement())
-  dataInicio DateTime
-  dataFim DateTime
-  students Student[]
-
-  curso Curso @relation(fields: [idCurso], references: [id])
-  idCurso Int
-}
-
-model loginInstitucional {
+model login {
   email String @id
   hashSenha String
 }

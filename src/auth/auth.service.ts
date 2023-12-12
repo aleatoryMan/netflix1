@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { AuthDtoSingup, AuthDtoSignin } from "./dto";
+import { AuthDto } from "./dto";
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { JwtService } from "@nestjs/jwt";
@@ -17,62 +17,11 @@ export class AuthService {
 
         
     }
-
-    async signupInstitucional(dto: AuthDtoSignin) {
-        const hash = await argon.hash(dto.password);
-        
-        try {
-            
-            const user = await this.prisma.loginInstitucional.create({
-                data: {
-                    email: dto.email,
-                    hashSenha: hash,
-                },
-            })
-            
-            return this.signToken(user.email, 'institucional');
-            
-        } catch(error) {
-            if (error instanceof PrismaClientKnownRequestError)
-                if (error.code === 'P2002')
-                    throw new ForbiddenException(
-                        'um dos dados ja existem no banco de dados!'
-                    );
-
-            throw error;
-        }
-    }
-
-    async signinInstitucional(dto: AuthDtoSignin) {
-        const user = 
-            await this.prisma.loginInstitucional.findUnique({
-                where: {
-                    email: dto.email,
-                },
-            });
-        
-        if (!user) 
-            throw new ForbiddenException(
-                'Estudante nao cadastrado'
-            );
-
-        const pwMatches = 
-            await argon.verify(
-                user.hashSenha, dto.password
-            );
-
-        if (!pwMatches)
-            throw new ForbiddenException(
-                'Senha incorreta!'
-            );
-        
-        return this.signToken(user.email, 'institucional');
-    }
     
-    async signin(dto: AuthDtoSignin) {
+    async signin(dto: AuthDto) {
         
         const user = 
-            await this.prisma.student.findUnique({
+            await this.prisma.login.findUnique({
                 where: {
                     email: dto.email,
                 },
@@ -93,27 +42,25 @@ export class AuthService {
                 'Senha incorreta!'
             );
         
-        return this.signToken(user.email, 'estudante');
+        return this.signToken(user.email);
     }
 
-    async signup(dto: AuthDtoSingup) {
+    async signup(dto: AuthDto) {
         const hash = await argon.hash(dto.password);
         
         try {
             
-            const user = await this.prisma.student.create({
+            const user = await this.prisma.login.create({
                 data: {
                     email: dto.email,
-                    nome: dto.nome,
-                    matricula: dto.matricula,
-                    cpf: dto.cpf,
-                    hashSenha: hash, 
-                    dataNascimento: dto.dataNascimento,                
-                    endereco_eth: dto.endereco_eth,
+                    hashSenha: hash,                     
                 },
+                select: {
+                    email: true
+                }
             })
             
-            return this.signToken(user.email, 'estudante');
+            return this.signToken(user.email);
             
         } catch(error) {
             if (error instanceof PrismaClientKnownRequestError)
@@ -128,12 +75,10 @@ export class AuthService {
 
     async signToken(
         email: string,
-        origem: string,
     ): Promise<{access_token: string}> {
 
         const payload = {
             sub: email,
-            origem: origem,
         }
 
         const token = await this.jwt.signAsync(

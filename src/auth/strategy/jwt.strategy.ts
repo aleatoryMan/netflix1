@@ -20,28 +20,19 @@ export class JwtStrategy extends PassportStrategy(
 
     async validate(payload: any) {
         
-        let dadosUsuario = null;
-
-        if (payload.origem === 'estudante') {
-            dadosUsuario = await this.prisma.student.findUnique({
-                where: {
-                    email: payload.sub
-                }
-            })
-        }
-        else if (payload.origem === 'institucional') {
-            dadosUsuario = await this.prisma.loginInstitucional.findUnique({
-                where: {
-                    email: payload.sub
-                }
-            })
-        }
+        const dadosUsuario = await this.prisma.login.findUnique({
+            where: {
+                email: payload.sub
+            },
+            select: {
+                email: true
+            }
+        })
+        
 
         if (dadosUsuario === null) {
             throw new UnauthorizedException('Acesso não autorizado');
         }
-
-        delete dadosUsuario.hashSenha;
         
         return dadosUsuario;
     }
