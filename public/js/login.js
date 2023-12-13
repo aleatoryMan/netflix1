@@ -1,5 +1,6 @@
 
 
+
 function signin(evento) {
     
     evento.preventDefault();
@@ -21,7 +22,7 @@ function signin(evento) {
     }
 
     
-    fetch('http://localhost:3333/Auth/signin', {
+    fetch('http://192.168.25.133:3000/Auth/signin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -40,11 +41,11 @@ function signin(evento) {
         })
         .then(jwt => {
             localStorage.setItem('access_token', jwt.access_token);
-            window.location.href = '../aluno/aluno.html';
-
+            window.location.href = "http://192.168.25.133:3000/frontend/conteudo";
         })
         .catch(error => {
             console.error('Erro ao processar a resposta: ', error);
+            alert('Email ou Senha incorretos');
         });
     
 }

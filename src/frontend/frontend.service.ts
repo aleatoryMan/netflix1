@@ -29,4 +29,16 @@ export class FrontendService {
         const pagina = readFileSync(page, 'utf-8');
         return pagina;
     }
+
+    async conteudo() {
+        const page = this.getPage('conteudo.html');
+        const pagina = readFileSync(page, 'utf-8');
+        return pagina;
+    }
+
+    async load() {
+        const page = this.getPage('load.html');
+        const pagina = readFileSync(page, 'utf-8');
+        return pagina;
+    }
 }

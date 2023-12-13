@@ -36,5 +36,16 @@ export class FrontendController {
     home() {
         return this.service.home();
     }
+    
+    @Get('conteudo')
+    conteudo() {
+        return this.service.load();
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('conteudo_auth')
+    conteudoAuth() {
+        return this.service.conteudo();
+    }
 
 }
