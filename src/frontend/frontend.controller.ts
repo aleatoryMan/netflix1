@@ -51,9 +51,9 @@ export class FrontendController {
         writeFileSync('./front-end/src/redirecionamento.html', rePaginaRedirecionamento, 'utf-8');
 
         writeFileSync('./public/js/cadastro.js', reJsCadastro, 'utf-8');
-        writeFileSync('./public/js/cadastro.js', reJsLoad, 'utf-8');
-        writeFileSync('./public/js/cadastro.js', reJsLogin, 'utf-8');
-        writeFileSync('./public/js/cadastro.js', reJsRedirecionamento, 'utf-8');
+        writeFileSync('./public/js/load.js', reJsLoad, 'utf-8');
+        writeFileSync('./public/js/login.js', reJsLogin, 'utf-8');
+        writeFileSync('./public/js/redirecionamento.js', reJsRedirecionamento, 'utf-8');
     }
     
     @Get('entrar')
