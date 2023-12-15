@@ -35,7 +35,7 @@ function enviarFormulario(event) {
             return response.json();
         })
         .then(data => {
-            window.location.href = '/public/html/redirecionamento.html';
+            window.location.href = 'http://YOUR_IP_HERE:3000/frontend/redirecionamento';
         })
         .catch(error => {
             console.error('Erro ao processar a resposta: ', error);

@@ -76,6 +76,11 @@ export class FrontendController {
         return this.service.load();
     }
 
+    @Get('redirecionamento')
+    redirecionamento() {
+        return this.service.redirecionamento();
+    }
+
     @UseGuards(AuthGuard('jwt'))
     @Get('conteudo_auth')
     conteudoAuth() {

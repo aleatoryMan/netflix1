@@ -42,4 +42,10 @@ export class FrontendService {
         const pagina = readFileSync(page, 'utf-8');
         return pagina;
     }
+
+    async redirecionamento() {
+        const page = this.getPage('redirecionamento.html');
+        const pagina = readFileSync(page, 'utf-8');
+        return pagina;
+    }
 }
