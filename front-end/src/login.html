@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,15 +10,11 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         >
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">        
-        <link href="/public/styles/login.css" rel="stylesheet">
-
     </head>
 
     <body>
 
-        <!-- navbar -->
+      <!-- navbar -->
       <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
           <div class="container-fluid">
             <a class="navbar-brand" href="http://192.168.25.133:3000/frontend/home">
@@ -45,21 +40,28 @@
       </nav>
 
 
-        <!-- form login -->
-        <main class="form-signin w-100 m-auto">
-            <form id="formLogin">
-                <h1 class="h3 mb-3 fw-normal">Login</h1>
-                <div class="form-floating">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="nome@exemplo.com">
-                    <label for="inputEmail">Endere&ccedil;o de Email</label>
+        <!-- formulário -->
+        <div class="container mt-5">
+            <form id="meuFormulario">
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input class="form-control" type="email" id="inputEmail" placeholder="exemplo@gmail.com">
                 </div>
-                <div class="form-floating mb-4">
-                    <input type="password" class="form-control" id="inputSenha" placeholder="Password">
-                    <label for="inputSenha">Senha</label>
+                <div class="mb-4">
+                    <label for="inputSenha" class="form-label">Senha</label>
+                    <input class="form-control" type="password" id="inputSenha" aria-describedby="senhaAjudaInline">
+                    <span id="senhaAjudaInline" class="form-text">
+                        Senha deve ter entre 8 a 30 caracteres.
+                    </span>
                 </div>
-                <button class="btn btn-primary w-100 py-2" type="submit">Entrar</button>
+                <div class="mb-3">
+                    <label for="inputConfirmarSenha" class="form-label">Corfirmar Senha</label>
+                    <input class="form-control" type="password" id="inputConfirmarSenha" placeholder="Digite Sua Senhas Novamente">
+                </div>              
+
+                <button type="submit" class="btn btn-primary" id="btnEnviarForm">Realizar Cadastro</button>
             </form>
-        </main>
+        </div>
 
 
         <!-- footer -->
@@ -69,7 +71,7 @@
               <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
                 <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
               </a>
-              <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Dark Hash.LTDA</span>
+              <span class="mb-3 mb-md-0 text-body-secondary">&copy; FootFlix.LTDA</span>
             </div>
         
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
@@ -87,6 +89,6 @@
         >
         </script>
 
-        <script src="/public/js/login.js"></script>
+        <script src="/public/js/cadastro.js"></script>
     </body>
 </html>
